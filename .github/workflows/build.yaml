@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   static:
-    name: Nix - Linux static
+    name: Nix - Linux x64 static
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
@@ -49,12 +49,12 @@ jobs:
           if-no-files-found: error
 
       - name: Build Docker image
-        run: nix-build -A docker.image --out-link postgrest-docker.tar.gz
+        run: nix-build -A docker.image --out-link postgrest-docker-amd64.tar.gz
       - name: Save built Docker image as artifact
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: postgrest-docker-x64
-          path: postgrest-docker.tar.gz
+          path: postgrest-docker-amd64.tar.gz
           if-no-files-found: error
 
 

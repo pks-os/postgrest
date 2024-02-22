@@ -1,13 +1,14 @@
 { buildToolbox
-, postgrest
-, dockerTools
 , checkedShellScript
+, dockerTools
+, postgrest
+, stdenv
 }:
 let
   image =
     dockerTools.buildImage {
       name = "postgrest";
-      tag = "latest";
+      tag = stdenv.system;
       copyToRoot = postgrest;
 
       # Set the current time as the image creation date. This makes the build
