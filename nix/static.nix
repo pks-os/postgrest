@@ -8,7 +8,7 @@ let
   # pkgsStatic is based on musl, so is a kind of cross-compilation.
   # We still make this explicit here via pkgsCross, because we need
   # to get postgresql/libpq for musl, too.
-  pkgsCross = pkgs.pkgsCross.musl64;
+  pkgsCross = pkgs.pkgsCross.aarch64-multiplatform-musl;
   inherit (pkgsCross) pkgsStatic;
   inherit (pkgsStatic.haskell) lib;
 
@@ -21,6 +21,8 @@ let
         enableDocs = false;
         # Cross compiling with native bignum works better than with gmp
         enableNativeBignum = true;
+        # Disabled by default on Aarch64
+        useLLVM = true;
       };
 
       overrides = pkgs.lib.composeExtensions old.overrides (_: prev: {
