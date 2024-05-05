@@ -21,8 +21,6 @@ let
         enableDocs = false;
         # Cross compiling with native bignum works better than with gmp
         enableNativeBignum = true;
-        # Disabled by default on Aarch64
-        useLLVM = true;
       };
 
       overrides = pkgs.lib.composeExtensions old.overrides (_: prev: {
